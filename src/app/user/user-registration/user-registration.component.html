@@ -1,0 +1,117 @@
+<!-- <app-top-bar></app-top-bar> -->
+
+<div class="container">
+  <div class="col-md-7 offset-md-2 mt-5">
+    <div class="card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-md-6">
+            <h5>{{'CARD.CARD_HEADER_USER_REGISTRATION' | translate}}</h5>
+          </div>
+        </div>
+      </div>
+      
+
+      <div class="card-body">
+        <form [formGroup]="userCreateForm" (ngSubmit)="onSubmit()">
+          <div class="py-1 col-md-12">
+            <div class="form-group row">
+                <label for="email" class="col-md-4">{{'FORM.FORM_EMAIL' | translate}}</label>
+                <div class="col-md-7">
+                  <input formControlName="email" class="form-control" placeholder="{{'FORM.FORM_EMAIL' | translate}}" type="text" autocomplete="new-email"
+                  [ngClass]="{ 'is-invalid': submitted && userCreateFormControl.email.errors }"/>
+                  <div *ngIf="submitted && userCreateFormControl.email.errors" class="invalid-feedback">    
+                    <div *ngIf="userCreateFormControl.email.errors.required">{{'FORM_ERROR.FORM_ERROR_EMAIL_REQUIRED' | translate}}</div> 
+                    <div *ngIf="userCreateFormControl.email.errors.email">{{'FORM_ERROR.FORM_ERROR_EMAIL_VALID' | translate}}</div>   
+                  </div>
+                </div>
+              </div>
+            <div class="form-group row">
+              <label for="userName" class="col-md-4">{{'FORM.FORM_USERNAME' | translate}}</label>
+              <div class="col-md-7">
+                <input formControlName="userName" class="form-control" placeholder="{{'FORM.FORM_USERNAME' | translate}}"
+                [ngClass]="{ 'is-invalid': submitted && userCreateFormControl.userName.errors }" />
+                <div *ngIf="submitted && userCreateFormControl.userName.errors" class="invalid-feedback">    
+                  <div *ngIf="userCreateFormControl.userName.errors.required">{{'FORM_ERROR.FORM_ERROR_USERNAME_REQUIRED' | translate}}</div>    
+                </div> 
+              </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="firstName" class="col-md-4">{{'FORM.FORM_FIRST_NAME' | translate}}</label>
+                <div class="col-md-7">
+                  <input formControlName="firstName" class="form-control" placeholder="{{'FORM.FORM_FIRST_NAME' | translate}}"  
+                  [ngClass]="{ 'is-invalid': submitted && userCreateFormControl.firstName.errors }" />
+                  <div *ngIf="submitted && userCreateFormControl.firstName.errors" class="invalid-feedback">    
+                    <div *ngIf="userCreateFormControl.firstName.errors.required">{{'FORM_ERROR.FORM_ERROR_FIRSTNAME_REQUIRED' | translate}}</div>    
+                  </div> 
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="lastName" class="col-md-4">{{'FORM.FORM_LAST_NAME' | translate}}</label>
+                <div class="col-md-7">
+                  <input formControlName="lastName" class="form-control" placeholder="{{'FORM.FORM_LAST_NAME' | translate}}"   
+                  [ngClass]="{ 'is-invalid': submitted && userCreateFormControl.lastName.errors }" />
+                  <div *ngIf="submitted && userCreateFormControl.lastName.errors" class="invalid-feedback">    
+                    <div *ngIf="userCreateFormControl.lastName.errors.required">{{'FORM_ERROR.FORM_ERROR_LASTNAME_REQUIRED' | translate}}</div>    
+                  </div> 
+                </div>
+              </div>
+
+            <div class="form-group row">
+              <label for="password" class="col-md-4">{{'FORM.FORM_PASSWORD_SIX_CHAR' | translate}}</label>
+              <div class="col-md-7">
+                <input formControlName="password" class="form-control" placeholder="{{'FORM.FORM_PASSWORD' | translate}}" type="password" autocomplete="new-password"
+                [ngClass]="{ 'is-invalid': submitted && userCreateFormControl.password.errors }" />
+                <div *ngIf="submitted && userCreateFormControl.password.errors" class="invalid-feedback">    
+                  <div *ngIf="userCreateFormControl.password.errors.required">{{'FORM_ERROR.FORM_ERROR_PASSWORD_REQUIRED' | translate}}</div>  
+                  <div *ngIf="userCreateFormControl.password.errors.minlength">{{'FORM_ERROR.FORM_ERROR_PASSWORD_CHAR' | translate}}</div>  
+                </div> 
+              </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="confirmPassword" class="col-md-4">{{'FORM.FORM_CONFIRM_PASSWORD' | translate}}</label>
+                <div class="col-md-7">
+                  <input formControlName="confirmPassword" class="form-control" placeholder="{{'FORM.FORM_CONFIRM_PASSWORD' | translate}}" type="password" autocomplete="new-password"
+                  [ngClass]="{ 'is-invalid': submitted && userCreateFormControl.confirmPassword.errors }"/>
+                  <div *ngIf="submitted && userCreateFormControl.confirmPassword.errors" class="invalid-feedback">    
+                    <div *ngIf="userCreateFormControl.confirmPassword.errors.required">{{'FORM_ERROR.FORM_ERROR_CONFIRM_PASSWORD_REQUIRED' | translate}}</div>
+                    <div *ngIf="userCreateFormControl.confirmPassword.errors.mustMatch">{{'FORM_ERROR.FORM_ERROR_PASSWORD_MATCH' | translate}}</div>    
+                  </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="roleSelectedValue" class="col-md-4">Is Employee Profile? </label>
+              <div class="col-md-7">
+                <div class="form-check">
+                    <input formControlName="isEmployeeProfile" class="form-check-input" type="checkbox" [checked] = 'true'>
+                  </div>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="roleSelectedValue" class="col-md-4">Is Active Employee? </label>
+              <div class="col-md-7">
+                <div class="form-check">
+                    <input formControlName="isActiveEmployee" class="form-check-input" type="checkbox" [checked] = 'true'>
+                  </div>
+              </div>
+            </div>
+
+            <div class="offset-md-4 col-md-4 mt-5">
+              <button [disabled]="loading" class="btn btn-block btn-sm btn-primary">    
+                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>    
+                {{'FORM.FORM_SUBMIT_BTN' | translate}}    
+              </button>
+            </div>
+            
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
